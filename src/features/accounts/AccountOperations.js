@@ -16,13 +16,15 @@ function AccountOperations() {
     balance,
     isLoading,
   } = useSelector((store) => store.account);
+
   console.log(balance);
 
   function handleDeposit() {
     if (!depositAmount) return;
+
     dispatch(deposit(depositAmount, currency));
     setDepositAmount("");
-    setCurrency("");
+    setCurrency("USD");
   }
 
   function handleWithdrawal() {
@@ -95,14 +97,14 @@ function AccountOperations() {
           <button onClick={handleRequestLoan}>Request loan</button>
         </div>
 
-        {
+        {currentLoan > 0 && (
           <div>
             <span>
               Pay back ${currentLoan} ({currentLoanPurpose})
             </span>
             <button onClick={handlePayLoan}>Pay loan</button>
           </div>
-        }
+        )}
       </div>
     </div>
   );
